@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
     try {
         actionTypes = await client.query(querySql);
     } catch (error) {
-        res.status(500).send(new Error("Erreur dans la récupération des types d'action", error));
+        res.status(500).send(error);
     }
     return res.status(200).send(actionTypes.rows);
 };
@@ -31,7 +31,7 @@ const getOne = async (req, res) => {
     try {
         actionType = await client.query(querySql);
     } catch (error) {
-        res.status(500).send(new Error("Erreur dans la récupération des types d'action", error));
+        res.status(500).send(error);
     }
     return res.status(200).send(actionType.rows);
 };
@@ -77,4 +77,21 @@ const updateOne = async (req, res) => {
     return res.status(200).send(updatedActionType.rows);
 };
 
-module.exports = { getAll, getOne, createOne, updateOne };
+const deleteOne = async (req, res) => {
+    const querySql = SQL`
+        DELETE FROM
+            action_types
+        WHERE
+            action_type_id=${req.params.id}
+        RETURNING *
+    `
+    let deletedActionType = null;
+    try {
+        deletedActionType = await client.query(querySql);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+    return res.status(200).send(deletedActionType.rows);
+};
+
+module.exports = { getAll, getOne, createOne, updateOne, deleteOne };
