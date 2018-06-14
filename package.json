@@ -1,0 +1,19 @@
+{
+  "name": "Projet-Pro",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": "https://github.com/ShamShams/Projet-Pro.git",
+  "author": "sremtoula@simplon.co <sremtoula@simplon.co>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.3",
+    "sql-template-strings": "^2.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
