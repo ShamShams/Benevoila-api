@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "env": "source .env",
     "start": "nodemon server.js"
   },
   "repository": "https://github.com/ShamShams/Projet-Pro.git",
   "author": "sremtoula@simplon.co <sremtoula@simplon.co>",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "pg": "^7.4.3",
     "sql-template-strings": "^2.2.2"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-react": "^7.10.0",
     "nodemon": "^1.17.5"
   }
 }
