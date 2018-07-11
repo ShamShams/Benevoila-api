@@ -1,4 +1,5 @@
 module.exports = {
     users: require('./users'),
-    actionTypes: require('./actionTypes')
+    actionTypes: require('./actionTypes'),
+    actions: require('./actions'),
 };
