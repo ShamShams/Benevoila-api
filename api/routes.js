@@ -5,7 +5,13 @@ const router = new express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-const { actionTypes } = require('./controllers');
+const { users, actionTypes } = require('./controllers');
+
+router.get('/users', users.getAll);
+router.get('/users/:id', users.getOne);
+router.post('/users', users.createOne);
+router.put('/users/:id', users.updateOne);
+router.delete('/users/:id', users.deleteOne);
 
 router.get('/actionTypes', actionTypes.getAll);
 router.get('/actionTypes/:id', actionTypes.getOne);
