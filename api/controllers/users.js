@@ -36,9 +36,7 @@ const users = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
-        };
-        if (req.body.photo) {
-            keyValue.photo = req.body.photo;
+            image: req.body.image
         };
 
         let users = new Users();
@@ -49,7 +47,7 @@ const users = {
         } catch (error) {
             res.send(error);
         }
-        return res.send({'New user added': newUser.rows[0]});
+        return res.send({'New user created': newUser.rows[0]});
     },
 
     updateOne: async (req, res) => {
@@ -61,9 +59,7 @@ const users = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
-        };
-        if (req.body.photo) {
-            keyValue.photo = req.body.photo;
+            image: req.body.image
         };
 
         let users = new Users();

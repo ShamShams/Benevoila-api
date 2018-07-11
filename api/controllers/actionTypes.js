@@ -42,7 +42,7 @@ const actionTypes = {
         } catch (error) {
             res.send(error);
         }
-        return res.send(newActionType.rows[0]);
+        return res.send({'New action type created': newActionType.rows[0]});
     },
 
     updateOne: async (req, res) => {
@@ -60,7 +60,7 @@ const actionTypes = {
         } catch (error) {
             res.send(error);
         }
-        return res.send(updatedActionType.rows);
+        return res.send({'Action type updated': updatedActionType.rows});
     },
 
     deleteOne: async (req, res) => {
@@ -74,7 +74,7 @@ const actionTypes = {
         } catch (error) {
             res.send(error);
         }
-        return res.send(deletedActionType.rows);
+        return res.send({'Action type deleted': deletedActionType.rows});
     }
 };
 
