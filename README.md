@@ -1,9 +1,9 @@
-# Projet Professionnel
+# Bénévoilà
 
 ## Description du projet
 _Ce projet a été réalisé dans le cadre du passage du titre professionnel de niveau III Développeur Logiciel à Simplon._
 
-Il s'agit d'une application web qui permet à une association de gérer ses actions de bénévolat et simplifie l'inscription de ses bénévoles aux différentes actions.
+Il s'agit d'une application web qui permet à une association de gérer ses actions de bénévolat et qui simplifie l'inscription de ses bénévoles aux différentes actions.
 
 __L'association__ peut ainsi ajouter et modifier des actions de bénévolat, en définissant le nombre minimum de bénévoles dont elle a besoin, et voir en temps réel combien de bénévoles sont inscrits à leurs actions et combien sont manquants.
 
