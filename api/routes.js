@@ -5,7 +5,7 @@ const router = new express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-const { users, actionTypes, actions } = require('./controllers');
+const { users, actionTypes, actions, registrations } = require('./controllers');
 
 router.get('/users', users.getAll);
 router.get('/users/:id', users.getOne);
@@ -24,5 +24,10 @@ router.get('/actions/:id', actions.getOne);
 router.post('/actions', actions.createOne);
 router.put('/actions/:id', actions.updateOne);
 router.delete('/actions/:id', actions.deleteOne);
+
+router.get('/registrations', registrations.getAll);
+router.get('/registrations/:id', registrations.getOne);
+router.post('/registrations', registrations.createOne);
+router.delete('/registrations/:id', registrations.deleteOne);
 
 module.exports = router;
