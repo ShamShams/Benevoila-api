@@ -5,43 +5,82 @@ class Model {
         this.table = table;
     }
 
-    parseSeveral (keyValue) {
+    parseSeveral(keyValue) {
         const keys = Object.keys(keyValue);
+        const values = Object.values(keyValue);
         let columns = '';
         let indexes = '';
-        let values = [];
-        for (const [index, key] of keys.entries()) {
-            columns += index === keys.length - 1 ? key : key + ',';
-            indexes += index === keys.length - 1 ? '$' + ( index + 1 ) : '$' + ( index + 1 ) + ',';
-            values.push(keyValue[key]);
-        }
-        return {columns, indexes, values};
+
+        keys.map((key, i) => {
+            columns += i === keys.length - 1 ? key : key + ', ';
+            indexes += i === keys.length - 1 ? '$' + (i+1) : '$' + (i+1) + ', ';
+        });
+
+        return { columns, indexes, values };
     }
 
     getAll() {
-        return connection.run(`SELECT * FROM ${this.table}`);
+        return connection.run(`
+            SELECT
+                *
+            FROM
+                ${this.table}
+        `);
     }
 
     getOne(idColumn, id) {
-        return connection.run(`SELECT * from ${this.table} WHERE ${idColumn}=${id}`);
+        return connection.run(`
+            SELECT
+                *
+            FROM
+                ${this.table}
+            WHERE
+                ${idColumn}=${id}
+        `);
     }
 
     createOne(keyValue) {
         const { columns, indexes, values } = this.parseSeveral(keyValue);
         let query = {
-            text : `INSERT INTO ${this.table}(${columns}) VALUES(${indexes})`,
+            text : `
+                INSERT INTO ${this.table} (
+                    ${columns}
+                ) VALUES (
+                    ${indexes}
+                ) RETURNING *
+            `,
             values : values
         };
         return connection.run(query);
-    };
+    }
 
-    getByOne(keyValue) {
-        const { columns, indexes, values } = this.parseSeveral(keyValue);
+    updateOne(keyValue, idColumn, id) {
+        const keys = Object.keys(keyValue);
+        const values = Object.values(keyValue);
+
         let query = {
-            text : `SELECT * FROM ${this.table} WHERE ${columns}=${indexes}`,
+            text : `
+                UPDATE
+                    ${this.table}
+                SET
+                    ${keys.map((key, i) => key + `=$${i+1}`)}
+                WHERE
+                    ${idColumn}=${id}
+                RETURNING *
+            `,
             values : values
         };
         return connection.run(query);
+    }
+
+    deleteOne(idColumn, id) {
+        return connection.run(`
+            DELETE FROM
+                ${this.table}
+            WHERE
+                ${idColumn}=${id}
+            RETURNING *
+        `);
     }
 }
 

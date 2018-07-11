@@ -1,6 +1,6 @@
 const { Model } = require('./Model');
 
-class ActionType extends Model {
+class ActionTypes extends Model {
 
     constructor () {
         super('action_types');
@@ -8,4 +8,4 @@ class ActionType extends Model {
 
 }
 
-module.exports = ActionType;
+module.exports = ActionTypes;

@@ -10,11 +10,13 @@ const client = new Client({
     password: db.password
 });
 
+(async () => {
+    await client.connect();
+})();
+
 module.exports = {
     run :  async (query) => {
-        await client.connect();
-        response = await client.query(query);
-        await client.end();
+        let response = await client.query(query);
         return response;
     }
 };
