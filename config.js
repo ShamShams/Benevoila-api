@@ -1,6 +1,6 @@
 const config = {};
 
-config.port = process.env.PORT || 3000
+config.port = process.env.PORT || 8080;
 
 config.server = {
     secret: process.env.APP_SECRET

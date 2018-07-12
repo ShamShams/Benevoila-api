@@ -19,13 +19,6 @@
         "eqeqeq": ["error", "always"],
         "no-multi-spaces": "error",
         "keyword-spacing": "error",
-        "react/jsx-uses-react": 2,
-        "react/jsx-uses-vars": 2,
-        "react/jsx-no-undef": 2,
-        "react/react-in-jsx-scope": 2,
         "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
-    },
-    "plugins": [
-        "react",
-    ]
+    }
 }
