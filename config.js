@@ -1,6 +1,6 @@
 const config = {};
 
-config.port = process.env.PORT || 8080;
+config.port = process.env.PORT || 3000;
 
 config.server = {
     secret: process.env.APP_SECRET
@@ -11,7 +11,7 @@ config.db = {
     port: process.env.PGPORT,
     database: process.env.PGDATABASE,
     user: process.env.PGUSER,
-    pwd: process.env.PGPASSWORD,
+    pwd: process.env.PGPASSWORD
 };
 
 module.exports = config;
