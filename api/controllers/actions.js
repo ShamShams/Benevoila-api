@@ -1,7 +1,6 @@
 const Actions = require('../../database/models/Actions');
 
 const actions = {
-
     getAll: async (req, res) => {
         let actions = new Actions();
         let allActions = null;
@@ -31,14 +30,13 @@ const actions = {
     createOne: async (req, res) => {
         const keyValue = {
             action_type_id: req.body.action_type_id,
-            date: req.body.date,
-            start_time: req.body.start_time,
-            end_time: req.body.end_time,
-            adress: req.body.adress,
-            city: req.body.city,
+            address: req.body.address,
             zipcode: req.body.zipcode,
-            nb_volunteers_needed: req.body.nb_volunteers_needed,
-            description: req.body.description
+            city: req.body.city,
+            need: req.body.need,
+            details: req.body.details,
+            start_date: req.body.start_date,
+            end_date: req.body.end_date
         };
 
         let actions = new Actions();
@@ -49,21 +47,20 @@ const actions = {
         } catch (error) {
             res.send(error);
         }
-        return res.send({'New action created': newAction.rows[0]});
+        return res.send({ 'New action created': newAction.rows[0] });
     },
 
     updateOne: async (req, res) => {
         const id = req.params.id;
         const keyValue = {
             action_type_id: req.body.action_type_id,
-            date: req.body.date,
-            start_time: req.body.start_time,
-            end_time: req.body.end_time,
-            adress: req.body.adress,
-            city: req.body.city,
+            address: req.body.address,
             zipcode: req.body.zipcode,
-            nb_volunteers_needed: req.body.nb_volunteers_needed,
-            description: req.body.description
+            city: req.body.city,
+            need: req.body.need,
+            details: req.body.details,
+            start_date: req.body.start_date,
+            end_date: req.body.end_date
         };
 
         let actions = new Actions();
@@ -74,7 +71,7 @@ const actions = {
         } catch (error) {
             res.send(error);
         }
-        return res.send({'Action updated': updatedAction.rows});
+        return res.send({ 'Action updated': updatedAction.rows });
     },
 
     deleteOne: async (req, res) => {
@@ -88,7 +85,20 @@ const actions = {
         } catch (error) {
             res.send(error);
         }
-        return res.send({'Action deleted': deletedAction.rows});
+        return res.send({ 'Action deleted': deletedAction.rows });
+    },
+
+    // CUSTOM METHODS
+    getAllWithType: async (req, res) => {
+        let actions = new Actions();
+        let actionsWithType = null;
+
+        try {
+            actionsWithType = await actions.getAllWithType();
+        } catch (error) {
+            res.send(error);
+        }
+        return res.send(actionsWithType.rows);
     }
 };
 

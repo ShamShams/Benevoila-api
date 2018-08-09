@@ -24,6 +24,7 @@ router.get('/actions/:id', actions.getOne);
 router.post('/actions', actions.createOne);
 router.put('/actions/:id', actions.updateOne);
 router.delete('/actions/:id', actions.deleteOne);
+router.get('/actionsWithType', actions.getAllWithType);
 
 router.get('/registrations', registrations.getAll);
 router.get('/registrations/:id', registrations.getOne);
