@@ -32,7 +32,7 @@ const users = {
         const keyValue = {
             role: 'volunteer',
             email: req.body.email,
-            password: req.body.password,
+            hash: req.body.hash,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
@@ -55,7 +55,7 @@ const users = {
         const keyValue = {
             role: 'volunteer',
             email: req.body.email,
-            password: req.body.password,
+            hash: req.body.hash,
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,

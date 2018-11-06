@@ -1,6 +1,7 @@
 module.exports = {
     users: require('./users'),
-    actionTypes: require('./actionTypes'),
+    auth: require('./auth'),
     actions: require('./actions'),
+    actionTypes: require('./actionTypes'),
     registrations: require('./registrations')
 };
