@@ -1,4 +1,4 @@
-const connection = require('../connection');
+const {run} = require('../connection');
 
 class Model {
     constructor(table) {
@@ -20,7 +20,7 @@ class Model {
     }
 
     getAll() {
-        return connection.run(`
+        return run(`
             SELECT
                 *
             FROM
@@ -29,7 +29,7 @@ class Model {
     }
 
     getOne(idColumn, id) {
-        return connection.run(`
+        return run(`
             SELECT
                 *
             FROM
@@ -51,7 +51,7 @@ class Model {
             `,
             values : values
         };
-        return connection.run(query);
+        return run(query);
     }
 
     updateOne(keyValue, idColumn, id) {
@@ -70,11 +70,11 @@ class Model {
             `,
             values : values
         };
-        return connection.run(query);
+        return run(query);
     }
 
     deleteOne(idColumn, id) {
-        return connection.run(`
+        return run(`
             DELETE FROM
                 ${this.table}
             WHERE

@@ -36,7 +36,7 @@ const users = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
-            image: req.body.image
+            image: null
         };
 
         let users = new Users();

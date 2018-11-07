@@ -15,8 +15,8 @@ const client = new Client({
 })();
 
 module.exports = {
-    run :  async (query) => {
-        let response = await client.query(query);
+    run :  async (sql) => {
+        let response = await client.query(sql);
         return response;
     }
 };
