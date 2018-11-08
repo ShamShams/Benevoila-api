@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const moment = require('moment');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -9,14 +8,16 @@ module.exports = {
         return hash;
     },
     
-    generateToken: (user) => {
-        const payload = {
-            iat: moment().unix(), // issued at : now
-            exp: moment().add(1, 'days').unix(), // expires at
-            iss: user.email, //issuer
-            sub: user.hash // substring
-        };
-        return jwt.sign(payload, process.env.APP_SECRET);
+    generateToken: (id) => {
+        if (process.env.APP_SECRET) {
+            const payload = {
+                userId: id
+            };
+            const token = jwt.sign(payload, process.env.APP_SECRET, {expiresIn: '1d'});
+            return token;
+        } else {
+            throw new Error('Cannot generate token, secret not found');
+        }
     },
     
     verifyLogin: (req, user) => {
