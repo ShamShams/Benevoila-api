@@ -2,8 +2,6 @@ const bcrypt = require('bcrypt');
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
 
-const {server} = require('../../config');
-
 module.exports = {
     hashPassword: async (password) => {
         const salt = await bcrypt.genSalt();
@@ -18,7 +16,7 @@ module.exports = {
             iss: user.email, //issuer
             sub: user.hash // substring
         };
-        return jwt.sign(payload, server.secret);
+        return jwt.sign(payload, process.env.APP_SECRET);
     },
     
     verifyLogin: (req, user) => {
