@@ -1,6 +1,8 @@
 const Users = require('../../database/models/Users');
 const {hashPassword, generateToken} = require('../lib/authentication');
 
+const emailRegex = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/;
+
 const users = {
     createOne: async (req, res) => {
         let users = new Users();
@@ -10,27 +12,31 @@ const users = {
             throw new Error('Email already exist');
         }
         
-        // On hash le password avant d'enregistrer le user dans la base de données
-        const hashedPassword = await hashPassword(req.body.password);
-        
-        // TODO: Vérfier password avec regex
-        const userInfos = {
-            role: 'volunteer', // Le user est bénévole par défaut
-            email: req.body.email,
-            password: hashedPassword,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            phone: req.body.phone,
-            image: null
-        };
-        let newUser = null;
-        try {
-            newUser = await users.createOne(userInfos);
-        } catch (error) {
-            res.send(error.message);
+        if (!emailRegex.test(req.body.email)) {
+            res.send('Wrong email. Please type a valid email.');
+        } else {
+            // On hash le password avant d'enregistrer le user dans la base de données
+            const hashedPassword = await hashPassword(req.body.password);
+            
+            // TODO: Vérfier password avec regex
+            const userInfos = {
+                role: 'volunteer', // Le user est bénévole par défaut
+                email: req.body.email,
+                password: hashedPassword,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                phone: req.body.phone,
+                image: null
+            };
+            let newUser = null;
+            try {
+                newUser = await users.createOne(userInfos);
+            } catch (error) {
+                res.send(error.message);
+            }
+            const token = generateToken(newUser.rows[0].user_id);
+            return res.send({'New user created': newUser.rows[0], token: token});
         }
-        const token = generateToken(newUser.rows[0].user_id);
-        return res.send({'New user created': newUser.rows[0], token: token});
     },
 
     getAll: async (req, res) => {
