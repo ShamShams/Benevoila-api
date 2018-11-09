@@ -1,6 +1,5 @@
-const connection = require('../connection');
-
 const { Model } = require('./Model');
+const { run } = require('../connection');
 
 class Actions extends Model {
     constructor() {
@@ -8,7 +7,7 @@ class Actions extends Model {
     }
 
     getAllWithType() {
-        return connection.run(`
+        return run(`
             SELECT
                 *
             FROM
