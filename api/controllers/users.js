@@ -3,11 +3,19 @@ const {hashPassword, generateToken} = require('../lib/authentication');
 
 const users = {
     createOne: async (req, res) => {
-        // Vérfier password avec regex
-        const hashedPassword = await hashPassword(req.body.password);
+        let users = new Users();
 
+        const emailAlreadyExist = await users.getUserByEmail(req.body.email).rowCount;
+        if (emailAlreadyExist) {
+            throw new Error('Email already exist');
+        }
+        
+        // On hash le password avant d'enregistrer le user dans la base de données
+        const hashedPassword = await hashPassword(req.body.password);
+        
+        // TODO: Vérfier password avec regex
         const userInfos = {
-            role: 'volunteer',
+            role: 'volunteer', // Le user est bénévole par défaut
             email: req.body.email,
             password: hashedPassword,
             firstname: req.body.firstname,
@@ -15,7 +23,6 @@ const users = {
             phone: req.body.phone,
             image: null
         };
-        let users = new Users();
         let newUser = null;
         try {
             newUser = await users.createOne(userInfos);
@@ -23,7 +30,7 @@ const users = {
             res.send(error.message);
         }
         const token = generateToken(newUser.rows[0].user_id);
-        return res.send({'New user created': newUser.rows[0]});
+        return res.send({'New user created': newUser.rows[0], token: token});
     },
 
     getAll: async (req, res) => {
