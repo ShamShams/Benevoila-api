@@ -1,4 +1,4 @@
-const {run} = require('../connection');
+const { run } = require('../connection');
 
 class Model {
     constructor(table) {
