@@ -8,6 +8,7 @@ router.use(express.urlencoded({ extended: true }));
 const { users, actionTypes, actions, registrations } = require('./controllers');
 
 router.post('/users/register', users.createOne);
+router.post('/users/login', users.login);
 router.get('/users', users.getAll);
 router.get('/users/:id', users.getOne);
 router.put('/users/:id', users.updateOne);

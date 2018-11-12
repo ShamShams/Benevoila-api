@@ -1,5 +1,7 @@
+const bcrypt = require('bcrypt');
+
 const Users = require('../../database/models/Users');
-const {hashPassword, generateToken} = require('../lib/authentication');
+const { hashPassword, generateToken } = require('../lib/authentication');
 
 const emailRegex = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/;
 
@@ -9,7 +11,7 @@ const users = {
 
         const emailAlreadyExist = await users.getUserByEmail(req.body.email).rowCount;
         if (emailAlreadyExist) {
-            throw new Error('Email already exist');
+            res.send('Email already exist');
         }
         
         if (!emailRegex.test(req.body.email)) {
@@ -18,7 +20,6 @@ const users = {
             // On hash le password avant d'enregistrer le user dans la base de données
             const hashedPassword = await hashPassword(req.body.password);
             
-            // TODO: Vérfier password avec regex
             const userInfos = {
                 role: 'volunteer', // Le user est bénévole par défaut
                 email: req.body.email,
@@ -37,6 +38,25 @@ const users = {
             const token = generateToken(newUser.rows[0].user_id);
             return res.send({'New user created': newUser.rows[0], token: token});
         }
+    },
+
+    login: async (req, res) => {
+        let users = new Users();
+        let userToLog = null;
+        try {
+            userToLog = await users.getUserByEmail(req.body.email);
+            if (!userToLog.rowCount) {
+                res.send('User not found');
+            } 
+            const isPasswordRight = await bcrypt.compare(req.body.password, userToLog.rows[0].password);
+            if (!isPasswordRight) {
+                res.send('Wrong password');
+            }
+        } catch (error){
+            res.send(error.message);
+        }
+        res.send(`Bienvenue ${userToLog.rows[0].firstname}`);
+        // RAF : TOKEN
     },
 
     getAll: async (req, res) => {
