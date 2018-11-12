@@ -3,7 +3,7 @@
         "ecmaFeatures": {
             "jsx": true,
             "modules": true
-        },
+        }
     },
 
     "env": {
@@ -12,7 +12,6 @@
     },
     "parser": "babel-eslint",
     "rules": {
-        "quotes": [2, "single"],
         "strict": [2, "never"],
         "semi": ["error", "always"],
         "indent": ["error", 4],
