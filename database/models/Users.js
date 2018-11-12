@@ -13,7 +13,7 @@ class Users extends Model {
             FROM
                 users
             WHERE
-                email=${email}
+                email='${email}'
         `);
     }
 }
