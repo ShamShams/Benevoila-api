@@ -11,11 +11,12 @@ const users = {
 
         const emailAlreadyExist = await users.getUserByEmail(req.body.email).rowCount;
         if (emailAlreadyExist) {
-            res.send('Email already exist');
-        }
-        
-        if (!emailRegex.test(req.body.email)) {
-            res.send('Wrong email. Please type a valid email.');
+            res.json({ success: false, msg: 'Cet e-mail existe déjà.' });
+        } else if (!emailRegex.test(req.body.email)) {
+            res.json({ 
+                success: false, 
+                msg: 'Veuillez taper un e-mail valide.'
+            });
         } else {
             // On hash le password avant d'enregistrer le user dans la base de données
             const hashedPassword = await hashPassword(req.body.password);
@@ -33,11 +34,11 @@ const users = {
             try {
                 newUser = await users.createOne(userInfos);
             } catch (error) {
-                res.send(error.message);
+                res.json(error.message);
             }
             const token = generateToken(newUser.rows[0].user_id);
             res.cookie('token', token);
-            return res.send({'New user created': newUser.rows[0]});
+            return res.json({ success: true, msg: 'Inscription réussie' });
         }
     },
 
@@ -47,17 +48,16 @@ const users = {
         try {
             userToLog = await users.getUserByEmail(req.body.email);
             if (!userToLog.rowCount) {
-                res.send('User not found');
+                res.send({ success: false, msg: 'L\'utilisateur n\'existe pas.' });
             } 
             const isPasswordRight = await bcrypt.compare(req.body.password, userToLog.rows[0].password);
             if (!isPasswordRight) {
-                res.send('Wrong password');
+                res.send({ success: false, msg: 'Le mot de passe est incorrect.' });
             }
         } catch (error){
             res.send(error.message);
         }
-        res.send(`Bienvenue ${userToLog.rows[0].firstname}`);
-        // RAF : TOKEN
+        res.send({ success: true, msg: `Bienvenue ${userToLog.rows[0].firstname}` });
     },
 
     getAll: async (req, res) => {
