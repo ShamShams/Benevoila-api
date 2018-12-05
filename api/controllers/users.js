@@ -36,7 +36,8 @@ const users = {
                 res.send(error.message);
             }
             const token = generateToken(newUser.rows[0].user_id);
-            return res.send({'New user created': newUser.rows[0], token: token});
+            res.cookie('token', token);
+            return res.send({'New user created': newUser.rows[0]});
         }
     },
 
