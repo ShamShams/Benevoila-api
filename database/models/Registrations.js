@@ -1,11 +1,9 @@
 const { Model } = require('./Model');
 
 class Registrations extends Model {
-
-    constructor () {
-        super('registrations');
-    }
-
+  constructor() {
+    super('registrations');
+  }
 }
 
 module.exports = Registrations;
