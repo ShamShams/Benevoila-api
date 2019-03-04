@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { getOneById } = require('../controllers/users');
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { getOneById } from '../controllers/users';
 
 export const authenticate = async (req, res) => {
   const { token } = req.body;

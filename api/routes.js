@@ -1,11 +1,14 @@
 import express from 'express';
 
+import users from './controllers/users';
+import actionTypes from './controllers/actionTypes';
+import actions from './controllers/actions';
+import registrations from './controllers/registrations';
+
 const router = new express.Router();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
-
-const { users, actionTypes, actions, registrations } = require('./controllers');
 
 router.post('/users/register', users.createOne);
 router.post('/users/login', users.login);

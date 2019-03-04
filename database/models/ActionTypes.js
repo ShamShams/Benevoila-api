@@ -1,4 +1,4 @@
-const { Model } = require('./Model');
+import Model from './Model';
 
 class ActionTypes extends Model {
   constructor() {
@@ -6,4 +6,4 @@ class ActionTypes extends Model {
   }
 }
 
-module.exports = ActionTypes;
+export default ActionTypes;

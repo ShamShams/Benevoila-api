@@ -14,9 +14,7 @@ const client = new Client({
   await client.connect();
 })();
 
-export default {
-  run: async sql => {
-    let response = await client.query(sql);
-    return response;
-  },
+export const run = async sql => {
+  let response = await client.query(sql);
+  return response;
 };

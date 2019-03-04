@@ -1,4 +1,4 @@
-const { run } = require('../connection');
+import { run } from '../connection';
 
 class Model {
   constructor(table) {
@@ -54,4 +54,4 @@ class Model {
   }
 }
 
-module.exports = { Model };
+export default Model;

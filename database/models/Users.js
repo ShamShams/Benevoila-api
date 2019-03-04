@@ -1,5 +1,5 @@
-const { Model } = require('./Model');
-const { run } = require('../connection');
+import Model from './Model';
+import { run } from '../connection';
 
 class Users extends Model {
   constructor() {
@@ -11,4 +11,4 @@ class Users extends Model {
   }
 }
 
-module.exports = Users;
+export default Users;

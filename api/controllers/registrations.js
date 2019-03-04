@@ -1,4 +1,4 @@
-const Registrations = require('../../database/models/Registrations');
+import Registrations from '../../database/models/Registrations';
 
 const registrations = {
   getAll: async (req, res) => {
@@ -59,4 +59,4 @@ const registrations = {
   },
 };
 
-module.exports = registrations;
+export default registrations;

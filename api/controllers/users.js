@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-const Users = require('../../database/models/Users');
+import Users from '../../database/models/Users';
 import { hashPassword, generateToken } from '../lib/authentication';
 
 const emailRegex = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/;
@@ -56,7 +56,6 @@ const users = {
     } catch (error) {
       res.send(error.message);
     }
-    console.log(generateToken);
     const token = generateToken(userToLog.rows[0].user_id);
     res.json({ success: true, msg: 'Connexion réussie', token });
   },
@@ -137,4 +136,4 @@ const users = {
   },
 };
 
-module.exports = users;
+export default users;

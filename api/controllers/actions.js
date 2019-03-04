@@ -1,4 +1,4 @@
-const Actions = require('../../database/models/Actions');
+import Actions from '../../database/models/Actions';
 
 const actions = {
   getAll: async (req, res) => {
@@ -102,4 +102,4 @@ const actions = {
   },
 };
 
-module.exports = actions;
+export default actions;

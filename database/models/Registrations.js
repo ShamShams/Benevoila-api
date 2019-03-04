@@ -1,4 +1,4 @@
-const { Model } = require('./Model');
+import Model from './Model';
 
 class Registrations extends Model {
   constructor() {
@@ -6,4 +6,4 @@ class Registrations extends Model {
   }
 }
 
-module.exports = Registrations;
+export default Registrations;
