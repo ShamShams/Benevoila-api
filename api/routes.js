@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = new express.Router();
 
@@ -32,4 +32,4 @@ router.get('/registrations', registrations.getAll);
 router.get('/registrations/:id', registrations.getOne);
 router.delete('/registrations/delete/:id', registrations.deleteOne);
 
-module.exports = router;
+export default router;

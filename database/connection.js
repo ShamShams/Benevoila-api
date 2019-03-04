@@ -1,6 +1,6 @@
-const { Client } = require('pg');
+import { Client } from 'pg';
 
-const { db } = require('../config');
+import { db } from '../config';
 
 const client = new Client({
   host: db.host,
@@ -14,7 +14,7 @@ const client = new Client({
   await client.connect();
 })();
 
-module.exports = {
+export default {
   run: async sql => {
     let response = await client.query(sql);
     return response;
