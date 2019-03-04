@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const Users = require('../../database/models/Users');
-const { hashPassword, generateToken } = require('../lib/authentication');
+import { hashPassword, generateToken } from '../lib/authentication';
 
 const emailRegex = /[a-z0-9]+[_a-z0-9\.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})/;
 
@@ -37,8 +37,7 @@ const users = {
         res.json(error.message);
       }
       const token = generateToken(newUser.rows[0].user_id);
-      res.cookie('token', token);
-      return res.json({ success: true, msg: 'Inscription réussie' });
+      res.json({ success: true, msg: 'Inscription réussie', token });
     }
   },
 
@@ -57,7 +56,9 @@ const users = {
     } catch (error) {
       res.send(error.message);
     }
-    res.send({ success: true, msg: `${userToLog.rows[0].firstname}` });
+    console.log(generateToken);
+    const token = generateToken(userToLog.rows[0].user_id);
+    res.json({ success: true, msg: 'Connexion réussie', token });
   },
 
   getAll: async (req, res) => {
@@ -84,6 +85,18 @@ const users = {
       res.send(error.message);
     }
     return res.send(user.rows);
+  },
+
+  getOneById: async id => {
+    let users = new Users();
+    let user = null;
+
+    try {
+      user = await users.getOne('user_id', id);
+    } catch (error) {
+      console.log(error.message);
+    }
+    return user.rows[0];
   },
 
   updateOne: async (req, res) => {
