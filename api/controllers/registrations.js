@@ -28,20 +28,33 @@ const registrations = {
   },
 
   createOne: async (req, res) => {
-    const keyValue = {
-      user_id: req.body.user_id,
-      action_id: req.body.action_id,
-    };
-
+    const { user_id, action_id } = req.body;
     let registrations = new Registrations();
-    let newRegistration = null;
 
-    try {
-      newRegistration = await registrations.createOne(keyValue);
-    } catch (error) {
-      res.send(error);
+    const registrationAlreadyExist = await registrations.getOneByUserAndActionId(
+      user_id,
+      action_id
+    );
+    console.log(registrationAlreadyExist.rowCount);
+    if (registrationAlreadyExist.rowCount) {
+      res.send({ success: false, msg: 'Vous êtes déjà inscrit à cette action' });
+    } else {
+      const keyValue = {
+        user_id,
+        action_id,
+      };
+      let newRegistration = null;
+      try {
+        newRegistration = await registrations.createOne(keyValue);
+      } catch (error) {
+        res.send({ success: false, error: error.message, msg: 'Erreur lors de l’inscription' });
+      }
+      return res.send({
+        success: true,
+        info: newRegistration.rows[0],
+        msg: 'Vous avez bien été inscrit',
+      });
     }
-    return res.send({ 'New registration created': newRegistration.rows[0] });
   },
 
   deleteOne: async (req, res) => {
