@@ -1,16 +1,16 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { getOneById } from '../controllers/users';
+import users from '../controllers/users';
 
 export const authenticate = async (req, res) => {
   const { token } = req.body;
   if (!token) {
-    res.send({ success: false, msg: 'Pas de token', user: null });
+    res.send({ success: false, msg: 'Pas de token', user: false });
   } else {
     let user = null;
     try {
       const decoded = jwt.verify(token, process.env.APP_SECRET);
-      user = await getOneById(decoded.userId);
+      user = await users.getOneById(decoded.userId);
     } catch (err) {
       res.send({ success: false, msg: err, user: null });
     }
@@ -30,9 +30,8 @@ export const verifyToken = (req, res, next) => {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.APP_SECRET, (err, decoded) => {
       if (err) {
-        console.log('Token invalide');
+        console.log(`Token invalide pour la route ${req.originalUrl}`);
       } else {
-        console.log('Token valide');
         next();
       }
     });
