@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { authenticate } from './lib/authentication';
 import users from './controllers/users';
 import actionTypes from './controllers/actionTypes';
 import actions from './controllers/actions';
@@ -9,6 +10,8 @@ const router = new express.Router();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
+
+router.post('/authenticate', authenticate);
 
 router.post('/users/register', users.createOne);
 router.post('/users/login', users.login);
