@@ -1,11 +1,9 @@
-const { Model } = require('./Model');
+import Model from './Model';
 
 class Registrations extends Model {
-
-    constructor () {
-        super('registrations');
-    }
-
+  constructor() {
+    super('registrations');
+  }
 }
 
-module.exports = Registrations;
+export default Registrations;

@@ -1,11 +1,9 @@
-const { Model } = require('./Model');
+import Model from './Model';
 
 class ActionTypes extends Model {
-
-    constructor () {
-        super('action_types');
-    }
-
+  constructor() {
+    super('action_types');
+  }
 }
 
-module.exports = ActionTypes;
+export default ActionTypes;

@@ -1,12 +1,9 @@
-const config = {
-    port: process.env.PORT || 3000,
-    db: {
-        host: process.env.PGHOST,
-        port: process.env.PGPORT,
-        database: process.env.PGDATABASE,
-        user: process.env.PGUSER,
-        pwd: process.env.PGPASSWORD
-    },
-};
+export const port = process.env.PORT || 3000;
 
-module.exports = config;
+export const db = {
+  host: process.env.PGHOST || 'localhost',
+  port: process.env.PGPORT || 5432,
+  database: process.env.PGDATABASE || 'benevoiladb',
+  user: process.env.PGUSER || 'postgres',
+  password: process.env.PGPASSWORD || 'admin',
+};

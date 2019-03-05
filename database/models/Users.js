@@ -1,21 +1,14 @@
-const { Model } = require('./Model');
-const { run } = require('../connection');
+import Model from './Model';
+import { run } from '../connection';
 
 class Users extends Model {
-    constructor () {
-        super('users');
-    }
+  constructor() {
+    super('users');
+  }
 
-    getUserByEmail(email) {
-        return run(`
-            SELECT
-                *
-            FROM
-                users
-            WHERE
-                email='${email}'
-        `);
-    }
+  getUserByEmail(email) {
+    return run(`SELECT * FROM users WHERE email='${email}'`);
+  }
 }
 
-module.exports = Users;
+export default Users;

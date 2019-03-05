@@ -1,18 +1,19 @@
-require('dotenv').load();
+import dotenv from 'dotenv';
+dotenv.load();
 
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import { verifyToken } from './api/lib/authentication';
+import routes from './api/routes';
 
-const routes = require('./api/routes');
-
-const config = require('./config');
-const port = config.port;
+import { port } from './config';
 
 const app = express();
 
 app.use(cors());
+app.use(verifyToken);
 app.use(routes);
 
 app.listen(port, () => {
-    console.log(`******** Server is running on port ${port} ********`);
+  console.log(`******** Server is running on port ${port} ********`);
 });
