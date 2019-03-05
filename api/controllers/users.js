@@ -22,7 +22,7 @@ const users = {
       const hashedPassword = await hashPassword(req.body.password);
 
       const userInfos = {
-        role: 'volunteer', // Le user est bénévole par défaut
+        role: 'bénévole', // Le user est bénévole par défaut
         email: req.body.email,
         password: hashedPassword,
         firstname: req.body.firstname,
