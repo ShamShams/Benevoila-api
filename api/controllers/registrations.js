@@ -79,9 +79,13 @@ const registrations = {
     try {
       deletedRegistration = await registrations.deleteOne('registration_id', id);
     } catch (error) {
-      res.send(error);
+      res.send({ success: false, error: error.message, msg: 'Erreur lors de la désinscription' });
     }
-    return res.send({ 'Registration deleted': deletedRegistration.rows });
+    return res.send({
+      success: true,
+      info: deletedRegistration.rows[0],
+      msg: 'Vous avez bien été désinscrit',
+    });
   },
 };
 
