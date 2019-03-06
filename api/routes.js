@@ -36,6 +36,7 @@ router.get('/actionsWithType', actions.getAllWithType);
 router.post('/registrations/create', registrations.createOne);
 router.get('/registrations', registrations.getAll);
 router.get('/registrations/user/:id', registrations.getAllByUser);
+router.get('/registrations/action/:id', registrations.getAllByAction);
 router.get('/registrations/:id', registrations.getOne);
 router.delete('/registrations/delete/:id', registrations.deleteOne);
 

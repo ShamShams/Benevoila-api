@@ -20,11 +20,25 @@ const registrations = {
     let userRegistrations = null;
 
     try {
-      userRegistrations = await registrations.getAllByUser(id);
+      userRegistrations = await registrations.getAllById('user_id', id);
     } catch (error) {
       res.send(error.message);
     }
     return res.send(userRegistrations.rows);
+  },
+
+  getAllByAction: async (req, res) => {
+    const { id } = req.params;
+
+    let registrations = new Registrations();
+    let actionRegistrations = null;
+
+    try {
+      actionRegistrations = await registrations.getAllById('action_id', id);
+    } catch (error) {
+      res.send(error.message);
+    }
+    return res.send(actionRegistrations.rows);
   },
 
   getOne: async (req, res) => {

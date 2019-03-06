@@ -10,8 +10,8 @@ class Registrations extends Model {
     return run(`SELECT * FROM registrations WHERE user_id=${userId} AND action_id=${actionId}`);
   }
 
-  getAllByUser(id) {
-    return run(`SELECT * FROM registrations WHERE user_id=${id}`);
+  getAllById(idColumn, id) {
+    return run(`SELECT * FROM registrations WHERE ${idColumn}=${id}`);
   }
 }
 
