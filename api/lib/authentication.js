@@ -12,7 +12,7 @@ export const authenticate = async (req, res) => {
       const decoded = jwt.verify(token, process.env.APP_SECRET);
       user = await users.getOneById(decoded.userId);
     } catch (err) {
-      res.send({ success: false, msg: err, user: null });
+      res.send({ success: false, msg: err, user: false });
     }
     res.json({ success: true, user });
   }
