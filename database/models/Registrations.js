@@ -9,6 +9,10 @@ class Registrations extends Model {
   getOneByUserAndActionId(userId, actionId) {
     return run(`SELECT * FROM registrations WHERE user_id=${userId} AND action_id=${actionId}`);
   }
+
+  getAllByUser(id) {
+    return run(`SELECT * FROM registrations WHERE user_id=${id}`);
+  }
 }
 
 export default Registrations;

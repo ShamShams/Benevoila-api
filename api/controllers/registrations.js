@@ -13,6 +13,20 @@ const registrations = {
     return res.send(allRegistrations.rows);
   },
 
+  getAllByUser: async (req, res) => {
+    const { id } = req.params;
+
+    let registrations = new Registrations();
+    let userRegistrations = null;
+
+    try {
+      userRegistrations = await registrations.getAllByUser(id);
+    } catch (error) {
+      res.send(error.message);
+    }
+    return res.send(userRegistrations.rows);
+  },
+
   getOne: async (req, res) => {
     const id = req.params.id;
 
@@ -35,7 +49,6 @@ const registrations = {
       user_id,
       action_id
     );
-    console.log(registrationAlreadyExist.rowCount);
     if (registrationAlreadyExist.rowCount) {
       res.send({ success: false, msg: 'Vous êtes déjà inscrit à cette action' });
     } else {
