@@ -47,7 +47,7 @@ const users = {
     try {
       userToLog = await users.getUserByEmail(req.body.email);
       if (!userToLog.rowCount) {
-        res.send({ success: false, msg: "L'utilisateur n'existe pas." });
+        res.send({ success: false, msg: 'L’utilisateur n’existe pas.' });
       }
       const isPasswordRight = await bcrypt.compare(req.body.password, userToLog.rows[0].password);
       if (!isPasswordRight) {
