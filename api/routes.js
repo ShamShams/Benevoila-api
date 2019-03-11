@@ -16,6 +16,7 @@ router.post('/authenticate', authenticate);
 router.post('/users/register', users.createOne);
 router.post('/users/login', users.login);
 router.get('/users', users.getAll);
+router.get('/users/admin', users.getAllAdmin);
 router.get('/users/:id', users.getOne);
 router.put('/users/:id', users.updateOne);
 router.delete('/users/delete/:id', users.deleteOne);
