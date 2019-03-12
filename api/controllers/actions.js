@@ -24,7 +24,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send(action.rows);
+    return res.send(action.rows[0]);
   },
 
   createOne: async (req, res) => {
@@ -34,6 +34,7 @@ const actions = {
       zipcode: req.body.zipcode,
       city: req.body.city,
       need: req.body.need,
+      referent_id: req.body.referent_id,
       details: req.body.details,
       start_date: req.body.start_date,
       end_date: req.body.end_date,
@@ -47,7 +48,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send({ 'New action created': newAction.rows[0] });
+    return res.json({ success: true, msg: 'L’action a été créée avec succès' });
   },
 
   updateOne: async (req, res) => {
@@ -58,6 +59,7 @@ const actions = {
       zipcode: req.body.zipcode,
       city: req.body.city,
       need: req.body.need,
+      referent_id: req.body.referent_id,
       details: req.body.details,
       start_date: req.body.start_date,
       end_date: req.body.end_date,
@@ -71,7 +73,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send({ 'Action updated': updatedAction.rows });
+    return res.json({ success: true, msg: 'L’action a été modifiée avec succès' });
   },
 
   deleteOne: async (req, res) => {
@@ -85,7 +87,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send({ 'Action deleted': deletedAction.rows });
+    return res.send({ success: true, msg: 'L’action a été supprimée avec succès' });
   },
 
   // CUSTOM METHODS

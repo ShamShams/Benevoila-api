@@ -9,6 +9,10 @@ class Users extends Model {
   getUserByEmail(email) {
     return run(`SELECT * FROM users WHERE email='${email}'`);
   }
+
+  getAllAdmin() {
+    return run(`SELECT * FROM users WHERE role='admin'`);
+  }
 }
 
 export default Users;

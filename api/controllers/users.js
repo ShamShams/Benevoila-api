@@ -47,7 +47,7 @@ const users = {
     try {
       userToLog = await users.getUserByEmail(req.body.email);
       if (!userToLog.rowCount) {
-        res.send({ success: false, msg: "L'utilisateur n'existe pas." });
+        res.send({ success: false, msg: 'L’utilisateur n’existe pas.' });
       }
       const isPasswordRight = await bcrypt.compare(req.body.password, userToLog.rows[0].password);
       if (!isPasswordRight) {
@@ -72,6 +72,18 @@ const users = {
     return res.send(allUsers.rows);
   },
 
+  getAllAdmin: async (req, res) => {
+    let users = new Users();
+    let allAdmins = null;
+
+    try {
+      allAdmins = await users.getAllAdmin();
+    } catch (error) {
+      res.send(error.message);
+    }
+    return res.send(allAdmins.rows);
+  },
+
   getOne: async (req, res) => {
     const id = req.params.id;
 
@@ -83,7 +95,7 @@ const users = {
     } catch (error) {
       res.send(error.message);
     }
-    return res.send(user.rows);
+    return res.send(user.rows[0]);
   },
 
   getOneById: async id => {
@@ -101,7 +113,7 @@ const users = {
   updateOne: async (req, res) => {
     const id = req.params.id;
     const keyValue = {
-      role: 'volunteer',
+      role: 'bénévole',
       email: req.body.email,
       password: hashedPassword,
       firstname: req.body.firstname,
