@@ -73,7 +73,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send({ 'Action updated': updatedAction.rows });
+    return res.json({ success: true, msg: 'L’action a été modifiée avec succès' });
   },
 
   deleteOne: async (req, res) => {
@@ -87,7 +87,7 @@ const actions = {
     } catch (error) {
       res.send(error);
     }
-    return res.send({ 'Action deleted': deletedAction.rows });
+    return res.send({ success: true, msg: 'L’action a été supprimée avec succès' });
   },
 
   // CUSTOM METHODS
