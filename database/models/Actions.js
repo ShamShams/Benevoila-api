@@ -7,7 +7,7 @@ class Actions extends Model {
   }
 
   getAllWithType() {
-    return run(`SELECT * FROM actions NATURAL LEFT OUTER JOIN action_types`);
+    return run(`SELECT * FROM actions NATURAL JOIN action_types`);
   }
 }
 
