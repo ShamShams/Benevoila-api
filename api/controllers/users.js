@@ -28,7 +28,6 @@ const users = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phone: req.body.phone,
-        image: null,
       };
       let newUser = null;
       try {
@@ -119,7 +118,6 @@ const users = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       phone: req.body.phone,
-      image: req.body.image,
     };
 
     let users = new Users();
